@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+***
+
+# AuthFlow - Next.js & Clerk Authentication MVP
+
+AuthFlow is a minimal, production-ready starter project demonstrating a complete authentication flow in a Next.js application using [Clerk](https://clerk.com/). The primary goal is to provide a clean, modern, and robust template for SaaS applications that require user authentication right out of the box.
+
+This project features a sleek landing page, user sign-up/sign-in flows, a protected dashboard, and a theme system with Dark and Silver modes.
+
+<br/>
+
+<!-- You can add a screenshot of your application here -->
+<!-- ![AuthFlow Screenshot](https://your-image-host.com/screenshot.png) -->
+
+---
+
+## ✨ Features
+
+-   **🔐 Complete Authentication:** Full sign-up, sign-in, and user management powered by Clerk.
+-   **🛡️ Protected Routes:** A secure `/dashboard` route accessible only to authenticated users.
+-   **🚀 Modern Tech Stack:** Built with Next.js (App Router), TypeScript, and Tailwind CSS.
+-   **🧩 Component-Based UI:** Styled with the brilliant [ShadCN/UI](https://ui.shadcn.com/) component library.
+-   **🎨 Dual Theming:** A beautiful and functional Dark & Silver (Light) mode toggle.
+-   **📂 Clean Structure:** Organized and intuitive folder structure for easy navigation and scalability.
+-   **🔒 Middleware Protection:** Utilizes Next.js middleware to enforce authentication rules across the app.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology       | Description                                            |
+| ---------------- | ------------------------------------------------------ |
+| **Next.js**      | The React Framework for the Web.                       |
+| **Clerk**        | The easiest way to add authentication to your app.     |
+| **TypeScript**   | Static typing for robust and maintainable code.        |
+| **Tailwind CSS** | A utility-first CSS framework for rapid UI development.|
+| **ShadCN/UI**    | Re-usable components built with Radix UI & Tailwind.   |
+| **Lucide React** | Beautiful and consistent open-source icons.            |
+| **PNPM**         | Fast, disk space-efficient package manager.            |
+
+---
+
+## 🚀 Getting Started
+
+Follow these steps to get the project up and running on your local machine.
+
+### 1. Clone the Repository
+
+First, clone the project repository to your local machine.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/AmirUpSkill/Clerk-Auth.git
+cd Clerk-Auth
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Install the necessary project dependencies using `pnpm`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+```
 
-## Learn More
+### 3. Set Up Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+This project requires API keys from Clerk to function.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1.  Go to the [Clerk Dashboard](https://dashboard.clerk.com/) and create a new application.
+2.  Navigate to **API Keys** and copy your **Publishable key** and **Secret key**.
+3.  Create a `.env.local` file in the root of your project by copying the example file:
+    ```bash
+    cp .env.example .env.local
+    ```
+4.  Paste your keys and set the redirect URLs in the `.env.local` file:
+    ```env
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+    CLERK_SECRET_KEY=sk_test_...
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+    NEXT_PUBLIC_CLERK_AFTER_SIGN_OUT_URL=/
+    ```
 
-## Deploy on Vercel
+### 4. Run the Development Server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You're all set! Start the development server to see the application in action.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to view the running application.
+
+---
+
+## 📁 Folder Structure
+
+The project uses the Next.js App Router and follows a feature-grouped folder structure.
+
+```bash
+📁 clerk-auth/
+├── 📁 app/
+│   ├── 📁 (auth)/                 # Authentication pages (sign-in, sign-up)
+│   ├── 📁 (main)/                 # Protected main application routes (dashboard)
+│   ├── 📄 globals.css             # Global styles
+│   ├── 📄 layout.tsx              # Root layout with providers
+│   └── 📄 page.tsx                # Public landing page
+│
+├── 📁 components/
+│   ├── 📁 providers/              # Wrapper components (ThemeProvider)
+│   ├── 📁 shared/                 # Reusable components (Header)
+│   └── 📁 ui/                     # Components from ShadCN/UI
+│
+├── 📁 lib/
+│   └── 📄 utils.ts                # Utility functions
+│
+├── 🛡️ middleware.ts              # Clerk authentication middleware
+├── ⚙️ .env.local                 # Environment variables
+└── ...                          # Other configuration files
+```
